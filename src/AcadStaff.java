@@ -74,4 +74,16 @@ public class AcadStaff extends User {
         return null;
     }
 
+    public void viewLecturerList(){
+        for(Lecturer lecturer : lecList){
+            System.out.println(lecturer.toString());
+        }
+    }
+
+    public void viewSubjectList(){
+        for(Subject sub: subList){
+            System.out.println(sub.toString());
+        }
+    } 
+
 }

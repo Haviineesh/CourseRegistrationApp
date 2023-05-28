@@ -6,7 +6,7 @@ public class Subject {
     private String code;
     private String subName;
     private String credit;
-    private Lecturer lecturer;
+    private Lecturer lecturer = null;
     private List<Student> studList;
     private final int MAX = 30;
 
@@ -33,7 +33,7 @@ public class Subject {
         return code;
     }
 
-    public void setCode(String code){
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -41,7 +41,7 @@ public class Subject {
         return subName;
     }
 
-    public void setSubName(String name){
+    public void setSubName(String name) {
         this.subName = name;
     }
 
@@ -92,7 +92,7 @@ public class Subject {
         }
     }
 
-    public void displayLecturer(){
+    public void displayLecturer() {
         System.out.println("Name: " + lecturer.getname());
     }
 
@@ -107,6 +107,21 @@ public class Subject {
             for (Student student : studList) {
                 System.out.println(student.getName() + " - " + student.getMatric());
             }
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (lecturer != null) {
+            return "Subject: " + subName +
+                    "Code: " + code +
+                    "Credit: " + credit +
+                    "Lecturer Name: " + lecturer.getname();
+        } else {
+            return "Subject: " + subName +
+                    "Code: " + code +
+                    "Credit: " + credit +
+                    "Lecturer NOT ASSIGNED";
         }
     }
 }

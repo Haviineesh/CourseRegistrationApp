@@ -1,11 +1,13 @@
 import java.util.Scanner;
 
 public class App {
+  private static Scanner scanner = new Scanner(System.in);
+  private static AcadStaff staff = new AcadStaff("En.Ali", "AC01");
+
   public static void main(String[] args) throws Exception {
     boolean continuing = true;
 
     Scanner scanner = new Scanner(System.in);
-    AcadStaff staff = new AcadStaff("En.Ali", "AC01");
 
     while (continuing) {
 
@@ -38,60 +40,7 @@ public class App {
           // lecturer.gradeStudent();
           break;
         case 3:
-          System.out.println("Good day: " + staff.getname());
-          System.out.println("Select An action below");
-          System.out.println("1) add subject only");
-          System.out.println("2) add lecturer only");
-          System.out.println("3) add subject with Lecturer");
-          System.out.println("4) Change subject's lecturer");
-          int aCChoice = scanner.nextInt();
-          scanner.nextLine(); // Consume newline character
-          if (aCChoice == 1) {
-            System.out.println("Please enter Subject code :");
-            String code = scanner.nextLine();
-            System.out.println("Please enter Subject name :");
-            String subName = scanner.nextLine();
-            System.out.println("Please enter Subject credit hours :");
-            String credit = scanner.nextLine();
-            staff.createSubject(code, subName, credit);
-
-          } else if (aCChoice == 2) {
-            System.out.println("Please enter lecturer name :");
-            String lecName = scanner.nextLine();
-            System.out.println("Please enter Lecturer ID :");
-            int lecID = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-            staff.registerlecList(lecName, lecID);
-          } else if (aCChoice == 3) {
-            System.out.println("Please enter Subject code :");
-            String code = scanner.nextLine();
-            System.out.println("Please enter Subject name :");
-            String subName = scanner.nextLine();
-            System.out.println("Please enter Subject credit hours :");
-            String credit = scanner.nextLine();
-            System.out.println("Please enter Subject lecturer name :");
-            String lecName = scanner.nextLine();
-            System.out.println("Please enter Lectuer ID :");
-            int lecID = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-            staff.registerlecList(lecName, lecID);
-            staff.createSubjectAndlecList(code, subName, credit, lecName, lecID);
-
-          } else if (aCChoice == 4) {
-            System.out.println("Please enter Subject code :");
-            String code = scanner.nextLine();
-            System.out.println("Please enter Subject lecturer name :");
-            String lecName = scanner.nextLine();
-            System.out.println("Please enter Lectuer ID :");
-            int lecID = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-            staff.changeSubLecturer(code, lecName, lecID);
-
-          } else {
-            System.out.println("Invalid input, please enter number 1, 2, 3, 4");
-          }
-
-          // staff.createSubject();
+          handleAcademicStaff();
           break;
         default:
           System.out.println("Invalid choice.");
@@ -106,19 +55,81 @@ public class App {
     scanner.close();
   }
 
-  // Acad Staff Function List
-  // public AcadStaff addSub(AcadStaff staff) {
-  //   System.out.println("Please enter Subject code :");
-  //   Scanner sc = new Scanner(System.in);
-  //   String code = sc.nextLine();
-  //   System.out.println("Please enter Subject name :");
-  //   String subName = sc.nextLine();
-  //   System.out.println("Please enter Subject credit hours :");
-  //   String credit = sc.nextLine();
-  //   staff.createSubject(code, subName, credit);
+  // ***********Academic Staff***************//
+  private static void handleAcademicStaff() {
+    System.out.println("Good day: " + staff.getname());
+    System.out.println("Select an action below");
+    System.out.println("1) Add subject only");
+    System.out.println("2) Add lecturer only");
+    System.out.println("3) Add subject with lecturer");
+    System.out.println("4) Change subject's lecturer");
 
-  //   sc.close();
-  //   return staff;
-  // }
+    int aCChoice = scanner.nextInt();
+    scanner.nextLine(); // Consume newline character
 
+    switch (aCChoice) {
+      case 1:
+        addSubject();
+        break;
+      case 2:
+        addLecturer();
+        break;
+      case 3:
+        addSubjectWithLecturer();
+        break;
+      case 4:
+        changeSubjectLecturer();
+        break;
+      default:
+        System.out.println("Invalid input, please enter number 1, 2, 3, or 4");
+        break;
+    }
+  }
+
+  private static void addSubject() {
+    System.out.println("Please enter Subject code :");
+    String code = scanner.nextLine();
+    System.out.println("Please enter Subject name :");
+    String subName = scanner.nextLine();
+    System.out.println("Please enter Subject credit hours :");
+    String credit = scanner.nextLine();
+    staff.createSubject(code, subName, credit);
+  }
+
+  private static void addLecturer() {
+    System.out.println("Please enter lecturer name :");
+    String lecName = scanner.nextLine();
+    System.out.println("Please enter Lecturer ID :");
+    int lecID = scanner.nextInt();
+    scanner.nextLine(); // Consume newline character
+    staff.registerlecList(lecName, lecID);
+  }
+
+  private static void addSubjectWithLecturer() {
+    System.out.println("Please enter Subject code :");
+    String code = scanner.nextLine();
+    System.out.println("Please enter Subject name :");
+    String subName = scanner.nextLine();
+    System.out.println("Please enter Subject credit hours :");
+    String credit = scanner.nextLine();
+    System.out.println("Please enter Subject lecturer name :");
+    String lecName = scanner.nextLine();
+    System.out.println("Please enter Lecturer ID :");
+    int lecID = scanner.nextInt();
+    scanner.nextLine(); // Consume newline character
+    staff.registerlecList(lecName, lecID);
+    staff.createSubjectAndlecList(code, subName, credit, lecName, lecID);
+  }
+
+  private static void changeSubjectLecturer() {
+    System.out.println("Please enter Subject code :");
+    String code = scanner.nextLine();
+    System.out.println("Please enter Subject lecturer name :");
+    String lecName = scanner.nextLine();
+    System.out.println("Please enter Lecturer ID :");
+    int lecID = scanner.nextInt();
+    scanner.nextLine(); // Consume newline character
+    staff.changeSubLecturer(code, lecName, lecID);
+  }
+  // ***********Academic Staff END***************//
 }
